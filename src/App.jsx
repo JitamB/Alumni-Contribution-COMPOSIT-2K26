@@ -1,13 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
+const ALUMNI = [
+  { name: "Shourya Dwivedi", batch: 2016 },
+  { name: "Ravi Tiwari", batch: 2016 },
+  { name: "Soumodeep Mandal", batch: 2017 },
+  { name: "Harsh Vardhan Dubey", batch: 2018 },
+  { name: "Arun Kumar Nayak", batch: 2019 },
+  { name: "Abhinav Khare", batch: 2019 },
+  { name: "Ishan Gupta", batch: 2020 },
+  { name: "Ramashish Gupta", batch: 2020 },
+];
+
 function App() {
   const leftRef = useRef(null);
   const rightRef = useRef(null);
+  const alumniRef = useRef(null);
   const footerRef = useRef(null);
   const [visible, setVisible] = useState({
     left: false,
     right: false,
+    alumni: false,
     footer: false,
   });
 
@@ -24,6 +37,7 @@ function App() {
     );
     if (leftRef.current) observer.observe(leftRef.current);
     if (rightRef.current) observer.observe(rightRef.current);
+    if (alumniRef.current) observer.observe(alumniRef.current);
     if (footerRef.current) observer.observe(footerRef.current);
     return () => observer.disconnect();
   }, []);
@@ -45,7 +59,7 @@ function App() {
           </h1>
           <p className="lead">
             COMPOSIT is the annual technical fest of the Department of
-            Metallurgy and Materials Engineering, IIT Kharagpur. Your
+            Metallurgical and Materials Engineering, IIT Kharagpur. Your
             contribution helps us make it bigger and better.
           </p>
           <p className="body">
@@ -115,14 +129,33 @@ function App() {
         </section>
       </main>
 
+      <section
+        ref={alumniRef}
+        data-section="alumni"
+        className={`alumni-section ${visible.alumni ? "visible" : ""}`}
+      >
+        <h2 className="alumni-heading">
+          Special thanks to our esteemed Alumni for contributing in{" "}
+          <em>COMPOSIT 2026</em>
+        </h2>
+        <div className="alumni-grid">
+          {ALUMNI.map((alum, i) => (
+            <div className="alumni-card" key={i} style={{ animationDelay: `${i * 0.07}s` }}>
+              <span className="alumni-name">{alum.name}</span>
+              <span className="alumni-batch">Batch of {alum.batch}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <footer
         ref={footerRef}
         data-section="footer"
         className={`footer ${visible.footer ? "visible" : ""}`}
       >
-        <p className="footer-note">
+        {/* <p className="footer-note">
           Your contributions will be shown on the official COMPOSIT website.
-        </p>
+        </p> */}
         <div className="footer-inner">
           <a
             href="https://composit.in"
