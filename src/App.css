@@ -145,6 +145,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -180,10 +181,12 @@
 }
 
 @keyframes cardGlow {
+
   0%,
   100% {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   }
+
   50% {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px var(--accent-soft);
   }
@@ -315,6 +318,118 @@
 .bank-details .mono {
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
+}
+
+/* ----- Alumni section ----- */
+.alumni-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 4rem);
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.alumni-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.alumni-heading {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.alumni-heading em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.alumni-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.alumni-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  opacity: 0;
+  animation: alumniCardIn 0.5s ease-out forwards;
+}
+
+.alumni-section.visible .alumni-card {
+  opacity: 0;
+  animation: alumniCardIn 0.5s ease-out forwards;
+}
+
+.alumni-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-soft);
+}
+
+@keyframes alumniCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alumni-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.alumni-batch {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+@media (max-width: 900px) {
+  .alumni-section {
+    text-align: center;
+  }
+
+  .alumni-card {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .alumni-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .alumni-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ----- Footer ----- */
